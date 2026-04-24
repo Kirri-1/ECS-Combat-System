@@ -1,0 +1,1 @@
+I am working on an ECS/DOTS version of a combat system. This is meant to research and learn how to use ECS/DOTS in my projects to write cleaner, more scalable code without the limitations that OOB projects have.
