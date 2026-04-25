@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113569159}
-  - component: {fileID: 1113569160}
   - component: {fileID: 1113569161}
   m_Layer: 0
   m_Name: TestPlayer
@@ -152,19 +151,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1113569160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113569157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c954ab3dd9e07734b87f00d54c67f82e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: EntityAssembly::CombatantStatsAuthoring
-  StatsSO: {fileID: 11400000, guid: 6606719981673ae458565638bee5b0a1, type: 2}
 --- !u!114 &1113569161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997395e0e8b855f4bbf3c2982086cb5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EntityAssembly::PlayerAuthoring
-  StatsSO: {fileID: 0}
+  StatsSO: {fileID: 11400000, guid: 6606719981673ae458565638bee5b0a1, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

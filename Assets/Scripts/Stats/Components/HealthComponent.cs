@@ -4,4 +4,6 @@ public struct HealthComponent : IComponentData
 {
     public float Current;
     public float Max;
+
+    public float RegenRate;
 }

@@ -5,6 +5,7 @@ public abstract class CombatantStatsSO : BaseStatsSO
     [Header("Shield")]
     public float MaxShield;
     public float StartingShield;
+    public float ShieldDecayRate;
 
     [Header("Defense")]
     public float BaseDefense;

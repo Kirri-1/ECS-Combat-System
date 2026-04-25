@@ -8,4 +8,5 @@ public abstract class BaseStatsSO : ScriptableObject
     [Header("Health")]
     public float MaxHealth;
     public float StartingHealth;
+    public float HealthRegenRate;
 }

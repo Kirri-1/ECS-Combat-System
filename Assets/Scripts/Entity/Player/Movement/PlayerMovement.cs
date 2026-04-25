@@ -1,6 +1,7 @@
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Transforms;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         DoSpeed();
+        SyncEntityPosition();
     }
 
     void DoSpeed()
@@ -148,5 +150,21 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         speedMultiplier += value;
+    }
+
+
+    private void SyncEntityPosition()
+    {
+        if (!_entityFound)
+            return;
+
+        var transform = _entityManager.GetComponentData<LocalTransform>(_playerEntity);
+        transform.Position = new Unity.Mathematics.float3(
+            playerRb.position.x,
+            playerRb.position.y,
+            playerRb.position.z
+            );
+
+        _entityManager.SetComponentData(_playerEntity, transform );
     }
 }

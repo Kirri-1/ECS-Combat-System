@@ -16,16 +16,19 @@ class BaseStatsBaker : Baker<BaseStatsAuthoring>
             return;
         }
 
-        Entity entity = GetEntity(authoring, TransformUsageFlags.Dynamic);
+        Entity entity = GetEntity(TransformUsageFlags.Dynamic);
         AddComponent(entity, new HealthComponent
         {
             Current = authoring.StatsSO.StartingHealth,
-            Max = authoring.StatsSO.MaxHealth
+            Max = authoring.StatsSO.MaxHealth,
+            RegenRate = authoring.StatsSO.HealthRegenRate
         });
 
         AddComponentObject(entity, new EntityGameObjectLink
         {
             GameObject = authoring.gameObject
         });
+
+        AddBuffer<DamageBufferElement>(entity);
     }
 }

@@ -15,8 +15,10 @@ MonoBehaviour:
   Name: Test Player
   MaxHealth: 100
   StartingHealth: 100
+  HealthRegenRate: 2.5
   MaxShield: 100
   StartingShield: 0
+  ShieldRegenRate: 2.5
   BaseDefense: 30
   BaseAttack: 25
   BaseSpeed: 5
