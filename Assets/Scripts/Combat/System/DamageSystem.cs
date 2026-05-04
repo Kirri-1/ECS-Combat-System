@@ -9,12 +9,15 @@ partial struct DamageSystem : ISystem
 {
     private ComponentLookup<ShieldComponent> _shieldLookup;
     private ComponentLookup<DefenseComponent> _defenseLookup;
+    private ComponentLookup<HealthComponent> _sourceHealthLookup;
 
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         _shieldLookup = state.GetComponentLookup<ShieldComponent>(false);
         _defenseLookup = state.GetComponentLookup<DefenseComponent>(true);
+
+        _sourceHealthLookup = state.GetComponentLookup<HealthComponent>(true);
     }
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
@@ -32,6 +35,7 @@ partial struct DamageSystem : ISystem
         {
             bool hasShield = _shieldLookup.HasComponent(entity);
             bool hasDefense = _defenseLookup.HasComponent(entity);
+            _sourceHealthLookup.Update(ref state);
 
             float shieldValue = hasShield ? _shieldLookup[entity].Current : 0;
             float defenseValue = hasDefense ? _defenseLookup[entity].Current : 0;
@@ -39,7 +43,22 @@ partial struct DamageSystem : ISystem
 
             foreach(var damage in damageBuffer)
             {
-                float remaining = damage.Amount;
+                float calculatedDamage = damage.Amount;
+                if (damage.IsPercentageOfTarget)
+                {
+                    calculatedDamage = health.ValueRW.Current * damage.Amount;
+                }
+                else if (damage.IsPercentageOfSelf && _sourceHealthLookup.HasComponent(damage.source))
+                {
+                    calculatedDamage = _sourceHealthLookup[damage.source].Current * damage.Amount;
+                }
+
+                if(damage.IsCritical)
+                {
+                    calculatedDamage *= damage.CriticalMultiplier;
+                }
+
+                    float remaining = calculatedDamage;
 
                 if(!damage.IgnoreShield && shieldValue >0)
                 {

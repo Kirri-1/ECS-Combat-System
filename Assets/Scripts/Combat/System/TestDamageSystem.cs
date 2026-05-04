@@ -21,10 +21,15 @@ partial struct TestDamageSystem : ISystem
                     Amount = 5f,
                     MinimumDamage = 1f,
                     IgnoreDefense = false,
-                    IgnoreShield = false
+                    IgnoreShield = false,
+                    Type = DamageType.Physical,
+                    source = Entity.Null,
+                    IsCritical = false,
+                    IsPercentageOfSelf = false,
+                    IsPercentageOfTarget = false,
+                    CriticalMultiplier = 1f
                 });
             }
         }
     }
-
 }
